@@ -1,0 +1,101 @@
+
+import java.sql.*;
+
+To INSERT::
+
+                 try {
+                     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                     var myURL = "jdbc:sqlserver://localhost:1433;databaseName=Schedule; user = sa; password = 1234;";
+                     Connection con = DriverManager.getConnection(myURL);
+                     Statement stmt;
+                     var SQL = "INSERT INTO Users VALUES(" + field1.getText() + ",'" + field2.getText() + "','"
+                             + field3.getText() + "','" + field4.getText() + "','" + field5.getText() + "')";
+                     stmt = con.createStatement();
+                     stmt.executeUpdate(SQL);
+                     stmt.close();
+                     con.close();
+
+                     Done d1 = new Done();
+                     d1.setVisible(true);
+                 } catch (SQLException e) {
+                     System.out.println("SQL Exception: " + e.toString());
+                 } catch (ClassNotFoundException cE) {
+                     System.out.println("Class not found exception: " + cE.toString());
+                 }
+
+To SELECT::
+
+                 try {
+                     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                     var myURL = "jdbc:sqlserver://localhost:1433;databaseName=Schedule;user=sa;password=1234;";
+                     Connection con = DriverManager.getConnection(myURL);
+                     Statement stmt;
+                     var SQL = "SELECT * FROM Users WHERE ID = " + field1.getText();
+                     stmt = con.createStatement();
+
+                     ResultSet rs;
+                     rs = stmt.executeQuery(SQL);
+                     rs.next();
+
+                     var ID = rs.getString("ID");
+                     var Nombre = rs.getString("Nombres");
+                     var Paterno = rs.getString("Paterno");
+                     var Materno = rs.getString("Materno");
+                     var Fecha = rs.getString("Contraseña");
+
+                     field1.setText(ID);
+                     field2.setText(Nombre);
+                     field3.setText(Paterno);
+                     field4.setText(Materno);
+                     field5.setText(Fecha);
+                     stmt.close();
+                     con.close();
+                 } catch (SQLException e) {
+                     System.out.println("SQL Exception: " + e.toString());
+                 } catch (ClassNotFoundException cE) {
+                     System.out.println("Class not found exception: " + cE.toString());
+                 }
+
+To UPDATE::
+
+                 try {
+                     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                     var myURL = "jdbc:sqlserver://localhost:1433;databaseName=Schedule;user=sa;password=1234;";
+                     Connection con = DriverManager.getConnection(myURL);
+                     Statement stmt;
+                     var SQL = "UPDATE Users SET Nombre='" + field2.getText() + "', Paterno='" + field3.getText()
+                             + "',Materno='" + field4.getText() + "',Fecha='" + field5.getText() + "' WHERE ID ="
+                             + field1.getText();
+                     stmt = con.createStatement();
+                     stmt.executeUpdate(SQL);
+                     stmt.close();
+                     con.close();
+
+                     Update w = new Update();
+                     w.setVisible(true);
+                 } catch (SQLException e) {
+                     System.out.println("SQL Exception: " + e.toString());
+                 } catch (ClassNotFoundException cE) {
+                     System.out.println("Class not found exception: " + cE.toString());
+                 }
+
+To DELETE::
+
+                 try {
+                     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                     var myURL = "jdbc:sqlserver://localhost:1433;databaseName=Schedule;user=sa;password=1234;";
+                     Connection con = DriverManager.getConnection(myURL);
+                     Statement stmt;
+                     var SQL = "DELETE Users WHERE ID =" + field1.getText();
+                     stmt = con.createStatement();
+                     stmt.executeUpdate(SQL);
+                     stmt.close();
+                     con.close();
+
+                     Delete d = new Delete();
+                     d.setVisible(true);
+                 } catch (SQLException e) {
+                     System.out.println("SQL Exception: " + e.toString());
+                 } catch (ClassNotFoundException cE) {
+                     System.out.println("Class not found exception: " + cE.toString());
+                 }
